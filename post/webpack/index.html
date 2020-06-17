@@ -1,22 +1,86 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://88light88.github.io</id>
-    <title>88light88</title>
-    <updated>2020-06-17T16:05:56.556Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://88light88.github.io"/>
-    <link rel="self" href="https://88light88.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
-    <logo>https://88light88.github.io/images/avatar.png</logo>
-    <icon>https://88light88.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, 88light88</rights>
-    <entry>
-        <title type="html"><![CDATA[webpack]]></title>
-        <id>https://88light88.github.io/post/webpack/</id>
-        <link href="https://88light88.github.io/post/webpack/">
-        </link>
-        <updated>2020-06-17T12:54:13.000Z</updated>
-        <content type="html"><![CDATA[<p>为什么使用webpack，回顾之前前端开发模式中存在的问题：<br>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>webpack | 88light88</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://88light88.github.io/favicon.ico?v=1592409856474">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://88light88.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://88light88.github.io">
+        <img class="avatar" src="https://88light88.github.io/images/avatar.png?v=1592409856474" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://88light88.github.io">
+        <h1 class="site-title">88light88</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">webpack</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-06-17</span>
+            
+          </div>
+          <div class="post-content">
+            <p>为什么使用webpack，回顾之前前端开发模式中存在的问题：<br>
 （1）随着前端项目的壮大引入JS依赖太多导致命名空间和依赖性导致的冲突变得越来越难以处理。<br>
 （2）需要手动处理依赖关系。<br>
 （3）其他非模块化开发导致的问题。<br>
@@ -80,16 +144,58 @@ console.log(aStr);
 <p>4、访问index.html并且查看输出<br>
 <img src="https://88light88.github.io/post-images/1592409640120.png" alt="" loading="lazy"></p>
 <p>通过以上代码就可以实现对webpack打包机的简单使用。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Github Blog]]></title>
-        <id>https://88light88.github.io/post/hello-github-blog/</id>
-        <link href="https://88light88.github.io/post/hello-github-blog/">
-        </link>
-        <updated>2020-06-17T08:32:14.000Z</updated>
-        <content type="html"><![CDATA[<p>This is my first github blog<br>
-<img src="https://88light88.github.io/post-images/1592382811234.jpeg" alt="有趣" loading="lazy"></p>
-]]></content>
-    </entry>
-</feed>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://88light88.github.io/post/hello-github-blog/">
+              <h3 class="post-title">
+                下一篇：Hello Github Blog
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/88light88/88light88.github.io" target="_blank">88light88</a> | <a class="rss" href="https://88light88.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
