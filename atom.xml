@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://88light88.github.io</id>
     <title>88light88</title>
-    <updated>2020-06-17T16:05:56.556Z</updated>
+    <updated>2020-06-18T06:04:17.549Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://88light88.github.io"/>
     <link rel="self" href="https://88light88.github.io/atom.xml"/>
@@ -10,78 +10,6 @@
     <logo>https://88light88.github.io/images/avatar.png</logo>
     <icon>https://88light88.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 88light88</rights>
-    <entry>
-        <title type="html"><![CDATA[webpack]]></title>
-        <id>https://88light88.github.io/post/webpack/</id>
-        <link href="https://88light88.github.io/post/webpack/">
-        </link>
-        <updated>2020-06-17T12:54:13.000Z</updated>
-        <content type="html"><![CDATA[<p>为什么使用webpack，回顾之前前端开发模式中存在的问题：<br>
-（1）随着前端项目的壮大引入JS依赖太多导致命名空间和依赖性导致的冲突变得越来越难以处理。<br>
-（2）需要手动处理依赖关系。<br>
-（3）其他非模块化开发导致的问题。<br>
-所以需要学习webpack来解决以上的问题。</p>
-<h2 id="webpack概述">webpack概述</h2>
-<p>webpack是一种前端资源构建工具，一个静态模块打包器，在webpack看来，前端所有的资源文件（js、css、img、less、...）都是一个个的模块，webpack会根据依赖关系进行分析（解决依赖关系）并把浏览器不认识的某些类型的文件（less等其他）翻译成浏览器认识的文件并进行打包。<br>
-<img src="https://88light88.github.io/post-images/1592399276771.png" alt="" loading="lazy"></p>
-<p>webpack可以做的事情：</p>
-<pre><code>代码转换、文件优化、代码分割、模块合并、自动刷新、代码校验、自动发布 
-</code></pre>
-<h2 id="webpack安装">webpack安装</h2>
-<p>1、安装wenpack之前需要安装nodejs以及npm。使用：</p>
-<pre><code>node -v  查看nodejs版本
-npm -v 查看npm版本
-</code></pre>
-<p>2、以上安装完成之后之后我们就可以使用npm安装webpack：</p>
-<pre><code>npm install -g webpack webpack-cli  安装webpack到全局环境中
-或使用npm init初始化项目后使用
-npm install -D wepack webpack-cli  安装webpack到项目中且只在开发环境中使用
-</code></pre>
-<p>3、尝试使用以上方式安装webpack<br>
-(1)使用npm init -y初始化项目<br>
-<img src="https://88light88.github.io/post-images/1592405715522.png" alt="" loading="lazy"><br>
-(2)使用npm install -D webpack webpack-cli在项目环境中安装webpack<br>
-<img src="https://88light88.github.io/post-images/1592405922577.png" alt="" loading="lazy"><br>
-安装完成后，可以看到已经重新生成了package.json并将webpack放入了devDependencies中：<br>
-<img src="https://88light88.github.io/post-images/1592406037347.png" alt="" loading="lazy"></p>
-<h2 id="第一个webpack项目">第一个webpack项目</h2>
-<p>1、使用刚才创建的01项目<br>
-2、将项目导入vscode后新建src目录并且在src目录之下创建index.js文件<br>
-项目结构：<br>
-<img src="https://88light88.github.io/post-images/1592407542573.png" alt="" loading="lazy"><br>
-编写一个简单的index.js文件<br>
-<img src="https://88light88.github.io/post-images/1592407691987.png" alt="" loading="lazy"><br>
-3、使用npx webpack 零配置对此项目进行打包<br>
-<img src="https://88light88.github.io/post-images/1592407843202.png" alt="" loading="lazy"><br>
-4、成功打包后会自动生成一个dist文件夹并且会生成打包后的main.js<br>
-<img src="https://88light88.github.io/post-images/1592407872267.png" alt="" loading="lazy"><br>
-上面代码只对简单的js文件进行打包，下面将对webpack的js模块化处理特性编码演示：<br>
-1、新建a.js文件并且使用CommonJS模块化规范导出此模块</p>
-<pre><code>module.exports = &quot;Hello World&quot;;
-</code></pre>
-<p>2、在index.js中导入a.js</p>
-<pre><code>var aStr = require('./a.js');
-console.log(aStr);
-</code></pre>
-<p>3、在打包后的dist文件夹中新建index.html文件并且引入当前目录（dist）下的main.js文件</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;script src=&quot;./main.js&quot;&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>4、访问index.html并且查看输出<br>
-<img src="https://88light88.github.io/post-images/1592409640120.png" alt="" loading="lazy"></p>
-<p>通过以上代码就可以实现对webpack打包机的简单使用。</p>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Github Blog]]></title>
         <id>https://88light88.github.io/post/hello-github-blog/</id>
