@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://88light88.github.io/favicon.ico?v=1592819974589">
+<link rel="shortcut icon" href="https://88light88.github.io/favicon.ico?v=1592830584040">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://88light88.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://88light88.github.io">
-        <img class="avatar" src="https://88light88.github.io/images/avatar.png?v=1592819974589" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://88light88.github.io/images/avatar.png?v=1592830584040" alt="" width="32px" height="32px">
       </a>
       <a href="https://88light88.github.io">
         <h1 class="site-title">88light88</h1>
@@ -162,6 +162,16 @@ npm install --save @babel/polyfill
 <p>执行转换指令npx babel src -d dist 后的结果已经对箭头函数转换成功（图右侧为转换成功）：<br>
 <img src="https://88light88.github.io/post-images/1592816392097.png" alt="" loading="lazy"></p>
 <h3 id="3-插件与预设">3、插件与预设</h3>
+<p>3.1 插件<br>
+插件是小型的javascript程序，代码的转换都是由它来做的，我们自己也可以编写自己的插件来实现特定的转换功能。但是一个插件只能实现某个特定转换功能，ES6+ 新语法很多，可以将一个个插件添加到配置中去但是这样干就会很麻烦，所以babel也就提供了预设这个概念。<br>
+3.2 预设<br>
+预设其实就是一堆插件的组合，我们可以根据自己的需要组合创建自己的预设，babel也提供和好几种插件提供给我们使用：</p>
+<pre><code>    @babel/preset-env
+    @babel/preset-flow
+    @babel/preset-react
+    @babel/preset-typescript
+</code></pre>
+<p>这样就可以在json配置中根据自己项目的需要使用babel提供的presets。</p>
 
           </div>
         </div>
