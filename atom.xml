@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://88light88.github.io</id>
     <title>88light88</title>
-    <updated>2020-06-22T07:23:53.957Z</updated>
+    <updated>2020-06-22T09:00:15.718Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://88light88.github.io"/>
     <link rel="self" href="https://88light88.github.io/atom.xml"/>
@@ -10,6 +10,85 @@
     <logo>https://88light88.github.io/images/avatar.png</logo>
     <icon>https://88light88.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 88light88</rights>
+    <entry>
+        <title type="html"><![CDATA[Babel官方文档学习笔记]]></title>
+        <id>https://88light88.github.io/post/babel-guan-fang-wen-dang-xue-xi-bi-ji/</id>
+        <link href="https://88light88.github.io/post/babel-guan-fang-wen-dang-xue-xi-bi-ji/">
+        </link>
+        <updated>2020-06-22T08:56:22.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="1-babel是什么">1、Babel是什么？</h3>
+<p>Babel是一个javascript的编译器，能够将ES6及以上新ES标准的代码转换为向后兼容的javascript语法。以便能够在当前版本与旧版本的浏览器中运行。</p>
+<h3 id="2-使用babel转换es6高级语法">2、使用Babel转换ES6+高级语法</h3>
+<p>官方文档的实例：</p>
+<pre><code class="language-js">// (1) Babel 输入： ES2015 箭头函数
+[1, 2, 3].map((n) =&gt; n + 1); 
+
+// (2) Babel 输出： ES5 语法实现的同等功能
+[1, 2, 3].map(function(n) {
+  return n + 1;
+});
+</code></pre>
+<p>以上 (1) 使用的是ES6中的箭头函数，在一些旧版本的浏览器（例如IE8等其他产品）中是不能使用的，所以我们需要使用babel对箭头函数进行转化。</p>
+<p>简单了解了babel之后想要实现此转换功能必须先对环境进行配置：</p>
+<p>2.1 新建一个空的文件夹然后使用npm初始化项目</p>
+<pre><code>npm init -y
+</code></pre>
+<p>2.2 使用npm安装babel以及babel的其他所需包</p>
+<pre><code>npm install --save-dev @babel/core @babel/cli @babel/preset-env
+npm install --save @babel/polyfill
+</code></pre>
+<p>2.3 编写babel.config.json配置文件</p>
+<pre><code class="language-json">{
+  &quot;presets&quot;: [
+    [
+      &quot;@babel/env&quot;,
+      {
+        &quot;targets&quot;: {
+          &quot;edge&quot;: &quot;17&quot;,
+          &quot;firefox&quot;: &quot;60&quot;,
+          &quot;chrome&quot;: &quot;67&quot;,
+          &quot;safari&quot;: &quot;11.1&quot;,
+        },
+        &quot;useBuiltIns&quot;: &quot;usage&quot;,
+      }
+    ]
+  ]
+}
+</code></pre>
+<p>2.4 转换ES6代码</p>
+<pre><code>npx babel src -d dist
+</code></pre>
+<p>以上在控制台中使用npx命令执行babel，并且指定了需要转换的文件的路径（src目录下的所有的文件），以及转换完成之后输出的地方（dist），命令中的 -d 是 --out-dir 的缩写表示将转换的文件输出到什么位置。</p>
+<p>2.5 查看转换后的代码</p>
+<pre><code class="language-js">&quot;use strict&quot;;
+
+// (1) Babel 输入： ES2015 箭头函数
+[1, 2, 3].map(n =&gt; n + 1);
+</code></pre>
+<p>以上的被babel转换后的输出，可以发现并没有被转换。这是因为在转换会默认读取babel.config.json配置文件，在配置文件中的 targets 的配置设置了需要支持浏览器的版本，以上设置的这些浏览器都已经支持了箭头函数所以并不会进行转换。现在将配置文件中的代码替换为一下的内容再次运行转换：</p>
+<pre><code class="language-json">{
+    &quot;presets&quot;: [
+      [
+        &quot;@babel/env&quot;,
+        {
+          &quot;targets&quot;: {
+            &quot;ie&quot;: &quot;8&quot;,
+            &quot;edge&quot;: &quot;17&quot;,
+            &quot;firefox&quot;: &quot;60&quot;,
+            &quot;chrome&quot;: &quot;67&quot;,
+            &quot;safari&quot;: &quot;11.1&quot;
+          },
+          &quot;useBuiltIns&quot;: &quot;usage&quot;
+        }
+      ]
+    ]
+  }
+</code></pre>
+<p>执行转换指令npx babel src -d dist 后的结果已经对箭头函数转换成功（图右侧为转换成功）：<br>
+<img src="https://88light88.github.io/post-images/1592816392097.png" alt="" loading="lazy"></p>
+<h3 id="3-预设与插件">3、预设与插件</h3>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Github Blog]]></title>
         <id>https://88light88.github.io/post/hello-github-blog/</id>
