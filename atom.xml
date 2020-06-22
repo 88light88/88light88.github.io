@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://88light88.github.io</id>
     <title>88light88</title>
-    <updated>2020-06-22T12:57:15.124Z</updated>
+    <updated>2020-06-22T15:18:40.022Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://88light88.github.io"/>
     <link rel="self" href="https://88light88.github.io/atom.xml"/>
@@ -102,6 +102,80 @@ npm install --save @babel/polyfill
     @babel/preset-typescript
 </code></pre>
 <p>这样就可以在json配置中根据自己项目的需要使用babel提供的presets。</p>
+<h3 id="4-polyfill">4、Polyfill</h3>
+<p>Babel 只是转换 syntax 层语法,所有需要 @babel/polyfill 来处理API兼容,又因为 polyfill 体积太大，所以通过 preset的 useBuiltIns 来实现按需加载,再接着为了满足 npm 组件开发的需要 出现了 @babel/runtime 来做隔离。<br>
+4.1、在index.js文件中写入一下的代码：</p>
+<pre><code class="language-js">let array = [1, 2, 3, 4, 5, 6];
+array.includes(item =&gt; item &gt; 2);
+new Promise()
+</code></pre>
+<p>4.2、使用babel进行转换<br>
+<img src="https://88light88.github.io/post-images/1592835778393.png" alt="" loading="lazy"><br>
+可以看到上图的结果，Babel默认只转换箭头函数、let，Promise 和 includes 都没有转换 。这是为什么，Babel 把 Javascript 语法 分为 syntax 和 api，先说 api , api 指那些我们可以通过 函数重新覆盖的语法 ，类似 includes,map,includes,Promise,凡是我们能想到重写的都可以归属到 api。啥子是 syntax ,像 箭头函数，let,const,class, 依赖注入 Decorators,等等这些，我们在 Javascript 在运行是无法重写的。那 Babel 只负责 转换 syntax , includes,map,includes 这些 API 层面的 怎么办, Babel 把这个放在了 单独放在了 polyfill 这个模块处理。<br>
+4.3、使用@babel/polyfill<br>
+首先安装polyfill支持</p>
+<pre><code>npm i @babel/polyfill -S 
+</code></pre>
+<p>接下来在babel.config.json中进行配置useBuiltIns属性：<br>
+第一：false（默认值）<br>
+该属性的值的意思就是不使用@babel/polyfill的特性，也就是说只要关于api层面的转换啥玩意也不干。</p>
+<p>babel.config.json</p>
+<pre><code class="language-json">{
+    &quot;presets&quot;: [
+      [
+        &quot;@babel/preset-env&quot;,
+        {
+          &quot;useBuiltIns&quot;: &quot;false&quot;,
+          &quot;debug&quot;: true
+        }
+      ]
+    ]
+  }
+</code></pre>
+<pre><code class="language-js">import '@babel/polyfill'
+let array = [1, 2, 3, 4, 5, 6];
+array.includes(item =&gt; item &gt; 2);
+new Promise()
+</code></pre>
+<p>编写完以上代码使用 npx babel src -d dist 指令编译之后控制台会报错，因为我们显式的配置了false，是不能使用@babel/polyfill特性的所以会报错。而如果不显式配置useBuiltIns则在转换时什么也不干。<br>
+第二：entry<br>
+设置为entry表示把全部的api层面的特性全部引入。<br>
+<img src="https://88light88.github.io/post-images/1592837044459.png" alt="" loading="lazy"><br>
+一般情况下不要将此属性配置为entry，它会把所有的实现全部都导入进来，这会导致我们的文件非常大。<br>
+第三：usage<br>
+此方式是按需导入。<br>
+<img src="https://88light88.github.io/post-images/1592837181751.png" alt="" loading="lazy"><br>
+可以看到这次我们即可已转换syntax层面的代码，也按需转换了api层面的代码。<br>
+4.4、使用babel/runtime<br>
+安装所需的project</p>
+<pre><code>npm install --save-dev @babel/plugin-transform-runtime
+npm install --save @babel/runtime
+</code></pre>
+<p>现在可以按需导入之特性了但是以上方式会导致一个问题，就是全局污染。我们使用runtime就是为了解决全局污染问题。<br>
+babel.config.json配置如下：</p>
+<pre><code class="language-json">{
+    &quot;presets&quot;: [
+      [
+        &quot;@babel/preset-env&quot;,
+        {
+          &quot;useBuiltIns&quot;: &quot;usage&quot;,
+          &quot;debug&quot;: true
+        }
+      ]
+    ],
+    &quot;plugins&quot;:[
+        [
+            &quot;@babel/plugin-transform-runtime&quot;,
+            {
+                &quot;corejs&quot;: 3
+              }
+        ]
+    ]
+  }
+</code></pre>
+<p>注意：corejs默认为false，corejs: 2表示只支持全局变量(例如 Promise)和静态属性(例如 arry.from) ，而 corejs: 3也支持实例属性(例如[].includes)。</p>
+<p>执行编译指令得到下图结果：<br>
+<img src="https://88light88.github.io/post-images/1592838864894.png" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
