@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://88light88.github.io</id>
     <title>88light88</title>
-    <updated>2020-06-22T09:02:10.871Z</updated>
+    <updated>2020-06-22T09:03:51.043Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://88light88.github.io"/>
     <link rel="self" href="https://88light88.github.io/atom.xml"/>
@@ -16,9 +16,14 @@
         <link href="https://88light88.github.io/post/babel-guan-fang-wen-dang-xue-xi-bi-ji/">
         </link>
         <updated>2020-06-22T08:56:22.000Z</updated>
+        <summary type="html"><![CDATA[<h3 id="1-babel是什么">1、Babel是什么？</h3>
+<p>Babel是一个javascript的编译器，能够将ES6及以上新ES标准的代码转换为向后兼容的javascript语法。以便能够在当前版本与旧版本的浏览器中运行。</p>
+<h3 id="2-使用babel转换es6高级语法">2、使用Babel转换ES6+高级语法</h3>
+]]></summary>
         <content type="html"><![CDATA[<h3 id="1-babel是什么">1、Babel是什么？</h3>
 <p>Babel是一个javascript的编译器，能够将ES6及以上新ES标准的代码转换为向后兼容的javascript语法。以便能够在当前版本与旧版本的浏览器中运行。</p>
 <h3 id="2-使用babel转换es6高级语法">2、使用Babel转换ES6+高级语法</h3>
+<!-- more -->
 <p>官方文档的实例：</p>
 <pre><code class="language-js">// (1) Babel 输入： ES2015 箭头函数
 [1, 2, 3].map((n) =&gt; n + 1); 
