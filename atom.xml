@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://88light88.github.io</id>
     <title>88light88</title>
-    <updated>2020-06-22T09:03:51.043Z</updated>
+    <updated>2020-06-22T09:59:37.611Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://88light88.github.io"/>
     <link rel="self" href="https://88light88.github.io/atom.xml"/>
@@ -91,7 +91,7 @@ npm install --save @babel/polyfill
 </code></pre>
 <p>执行转换指令npx babel src -d dist 后的结果已经对箭头函数转换成功（图右侧为转换成功）：<br>
 <img src="https://88light88.github.io/post-images/1592816392097.png" alt="" loading="lazy"></p>
-<h3 id="3-预设与插件">3、预设与插件</h3>
+<h3 id="3-插件与预设">3、插件与预设</h3>
 ]]></content>
     </entry>
     <entry>
