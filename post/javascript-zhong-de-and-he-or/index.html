@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>JavaScript 中的 &amp;&amp; 和 || | 88light88</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://88light88.github.io/favicon.ico?v=1593019815593">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://88light88.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://88light88.github.io">
+        <img class="avatar" src="https://88light88.github.io/images/avatar.png?v=1593019815593" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://88light88.github.io">
+        <h1 class="site-title">88light88</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">JavaScript 中的 &amp;&amp; 和 ||</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-06-24</span>
+            
+          </div>
+          <div class="post-content">
+            <p>今天在阅读Underscore.js源代码时看到这以下这样一段代码：</p>
+<pre><code class="language-js">var root = typeof self == 'object' &amp;&amp; self.self === self &amp;&amp; self ||
+            typeof global == 'object' &amp;&amp; global.global === global &amp;&amp; global ||
+            Function('return this')() ||
+            {};
+</code></pre>
+<p>在我们以前的学习和使用中，逻辑表达式最终会返回来一个布尔值，而这段代码最终会返回一个对象给root变量。这是怎么回事，它是怎么返回的，它是什么样的原理就不是很清楚了。后来通过在google查询资料才明白该使用方式，下面就来记录一下。</p>
+<h3 id="和">&amp;&amp; 和 ||</h3>
+<p>1、&amp;&amp;（与）：表示并且的关系。</p>
+<p>情况一：&amp;&amp; 两边是条件或者true和false，此情况flag的将会接收到一个布尔值。</p>
+<pre><code class="language-js">    var flag = 1==1 &amp;&amp; 2==2 ;
+</code></pre>
+<p>情况二：</p>
+<pre><code class="language-js">    var flag = 0 &amp;&amp; 1 &amp;&amp; 2 ;
+</code></pre>
+<p>情况三：</p>
+<pre><code class="language-js">    var flag = 1==1 &amp;&amp; 2 ；
+</code></pre>
+<p>以上的代码就类似于文章开头中的Underscore.js源码中的那一小段代码，我刚开始是这样理解这段代码的，在javascript中数值类型的值0或NaN为false，其他为true。在上面的例子中使用的是数值，所以我理解成 false &amp;&amp; true &amp;&amp; true 结果为 false ，可是在实践了之后大错特错，并不会这样返回这样的结果而是返回了0。后来在查询资料以及实验中得出一下的结论：<br>
+（1）如果逻辑运算符两侧都是布尔值（可以返回布尔值的条件），则在运算完成之后返回布尔值true或false。<br>
+（2）如果逻辑运算符两边为非布尔值它会去从左到右去将数据转换为布尔，依次判断是否存在false，如果存在则返回当前false位置的那个值，在上面情况二的例子就表示返回的是 0。如果依次转换并检测到结尾后没有为false的值，就返回最后一个值。<br>
+（3）逻辑运算符两侧既包含条件也包含值，类似于情况三这样。依次向右判断条件和值（转换）都为真，则返回最后一个值，否则就返回false</p>
+<h5 id="总结优先返回第一个为假的值否则返回true或最后一个值">总结：优先返回第一个为假的值，否则返回true或最后一个值。</h5>
+<p>2、||（或）</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://88light88.github.io/post/babel-guan-fang-wen-dang-xue-xi-bi-ji/">
+              <h3 class="post-title">
+                下一篇：Babel官方文档学习笔记
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/88light88/88light88.github.io" target="_blank">88light88</a> | <a class="rss" href="https://88light88.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
