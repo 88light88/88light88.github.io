@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://88light88.github.io</id>
     <title>88light88</title>
-    <updated>2020-06-25T10:01:19.400Z</updated>
+    <updated>2020-06-25T10:02:13.300Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://88light88.github.io"/>
     <link rel="self" href="https://88light88.github.io/atom.xml"/>
@@ -10,6 +10,91 @@
     <logo>https://88light88.github.io/images/avatar.png</logo>
     <icon>https://88light88.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 88light88</rights>
+    <entry>
+        <title type="html"><![CDATA[JavaScript 中的 逻辑运算符]]></title>
+        <id>https://88light88.github.io/post/javascript-zhong-de-and-he-or/</id>
+        <link href="https://88light88.github.io/post/javascript-zhong-de-and-he-or/">
+        </link>
+        <updated>2020-06-24T15:33:42.000Z</updated>
+        <content type="html"><![CDATA[<p>今天在阅读Underscore.js源代码时看到这以下这样一段代码：</p>
+<pre><code class="language-js">var root = typeof self == 'object' &amp;&amp; self.self === self &amp;&amp; self ||
+            typeof global == 'object' &amp;&amp; global.global === global &amp;&amp; global ||
+            Function('return this')() ||
+            {};
+</code></pre>
+<p>在之前的基础学习和使用中或在一般的经典编程语言中（JAVA，C等），逻辑表达式最终会返回来一个布尔值。在看上面的这段代码，发现它最终会返回一个对象给root变量而不是布尔值。这是怎么回事呢？通过在google查询资料才明白该使用的区别，下面就来记录一下。</p>
+<h3 id="逻辑运算符概念">逻辑运算符概念：</h3>
+<p>在javascript中有三个逻辑运算符：&amp;&amp;（与）、||（或）、!（非）。虽然他们被称为逻辑运算符，但这些运算符却可以被应用于任意类型的值（在传统编程中逻辑运算符只能被引用于布尔值），而不仅仅是布尔值，他们的返回结果也可以是任意类型的值。</p>
+<h3 id="与">&amp;&amp;（与）</h3>
+<p>当两个操作值(true、false)或条件表达式都是真值，就返回true，否则返回false。如下所示：</p>
+<pre><code class="language-js">result = true &amp;&amp; true ; //  true
+result = false &amp;&amp; true ; //  false
+result = true &amp;&amp; false ; //  false
+result = false &amp;&amp; false ; //  false
+</code></pre>
+<p>以上是传统的使用方式，在javascripit中逻辑运算符两侧不一定为条件表达式或布尔值，&amp;&amp;两侧可以是任意的操作数，字符串，数值，对象等这样都是可以的，如下所示（<strong>与操作寻找第一个假值</strong>）：</p>
+<pre><code class="language-js">result = value1 &amp;&amp; value2 &amp;&amp; value3;
+</code></pre>
+<p>以上的示例都做了以下的事情：</p>
+<ul>
+<li>从左到右依次计算操作数</li>
+<li>将每一个操作数都转换为布尔值，如果结果为false就停止计算，并返回这个操作数的初始值。</li>
+<li>如果所有的操作数都计算过（也就是，所有操作数都为true），则返回最后一个操作数。<br>
+换句话说，如果运算到假值就返回，否则所有操作数都没有假值就返回最后一个真值。<br>
+示例：</li>
+</ul>
+<pre><code class="language-js">    //如果运算到假值，就返回
+    result = 0 &amp;&amp; 1 ; // 0
+    //如果所有值都为真，返回最后一个操作数
+    result = 1 &amp;&amp; 2 ; // 2
+    //如果运算到假值，就返回
+    result = null &amp;&amp; 5 ; //null
+     //如果运算到假值，就返回
+    result = 0 &amp;&amp; &quot;test&quot; ; // 0
+    //如果运算到假值，就返回
+    result = 1 &amp;&amp; 2 &amp;&amp; null &amp;&amp; 3  ; // null
+    //如果所有值都为真，返回最后一个操作数
+    result = 1 &amp;&amp; 2 &amp;&amp; 3 ; // 3
+</code></pre>
+<h4 id="与运算比或运算的优先级要高所以会在或运算之前执行例如-a-b-c-d-完全跟-表达式加了括号一样a-b-c-d">与运算（&amp;&amp;）比或运算（||）的优先级要高，所以会在或运算之前执行，例如 a &amp;&amp; b || c &amp;&amp; d 完全跟 &amp;&amp; 表达式加了括号一样：(a &amp;&amp; b) || (c &amp;&amp; d)。</h4>
+<h3 id="或">||（或）</h3>
+<p>在传统编程中，逻辑或只能够操作布尔值。如果参与运算的的任意一个操作值为true，返回的结果就为true，否则就为false。如下所示：</p>
+<pre><code class="language-js">//基本使用方式
+result = true || true ; //  true
+result = false || true ; //  true
+result = true || false ; //  true
+result = false || false ; //  false
+</code></pre>
+<p>从以上的代码演示可以看出，只有在所有的条件都为false的时候结果才为false，否则只要存在一个true，结果都是true。<br>
+以上是对或运算符基本的使用，在Javascript中还有其他的特性。如下所示（<strong>或运算寻找第一个真值</strong>）：</p>
+<pre><code class="language-js">result = value1 || value2 || value3;
+</code></pre>
+<p>以上的||的示例都做了如下的事情：</p>
+<ul>
+<li>从左到右依次计算操作数</li>
+<li>处理每一个操作数时都将其转换为布尔值，如果结果时true，就停止计算并返回这个操作数的初始值。</li>
+<li>如果所有的操作数都被计算过（也就是，转换的结果都为false），则返回最后一个操作数。<br>
+示例：</li>
+</ul>
+<pre><code class="language-js">alert( 1 || 0 ); // 1（1 是真值）
+alert( true || 'no matter what' ); //（true 是真值）
+alert( null || 1 ); // 1（1 是第一个真值）
+alert( null || 0 || 1 ); // 1（第一个真值）
+alert( undefined || null || 0 ); // 0（所有的转化结果都是 false，返回最后一个值）
+</code></pre>
+<p>以上说的时&amp;&amp; 和 || 的传统使用方式以及javascript中的附加特性，学习完之后就可以对文章最开始的代码在进行解读：</p>
+<pre><code class="language-js">var root = typeof self == 'object' &amp;&amp; self.self === self &amp;&amp; self ||
+            typeof global == 'object' &amp;&amp; global.global === global &amp;&amp; global ||
+            Function('return this')() ||
+            {};
+</code></pre>
+<ul>
+<li>首先 typeof self == 'object' &amp;&amp; self.self === self &amp;&amp; self 判断的是或去当前代码是否运行在窗口环境中也就是浏览器中。这里使用的就是逻辑与的javascript特性。如果当前程序运行在浏览器环境，也就会有self对象。也就是说这段代码会<strong>寻找第一个假值</strong>，如果没有假值返回最后的self。</li>
+<li>其他后面的条件都是类似的。</li>
+<li>对所有的与做完运算之后，再次使用进行或运算<strong>寻找第一个真值</strong>，如果存在真值则立即返回，否则返回最后一个值，在上面的代码中也就是返回一个空的对象{}。</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Babel官方文档学习笔记]]></title>
         <id>https://88light88.github.io/post/babel-guan-fang-wen-dang-xue-xi-bi-ji/</id>
